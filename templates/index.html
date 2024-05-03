@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <ul>
+        {% for todo in todos %}
+        <li>{{ todo['title'] }} (id: {{ todo['id'] }})
+            <form action="/delete" method="post" style="display: inline;">
+                <input type="hidden" name="id" value="{{ todo['id'] }}">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% end %}
+    </ul>
+    <h2>Add New Todo</h2>
+    <form action="/new" method="post">
+        <input type="text" name="title" required>
+        <button type="submit">Add</button>
+    </form>
+</body>
+</html>

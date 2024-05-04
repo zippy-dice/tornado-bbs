@@ -2,24 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title }}</title>
+    <title>BBS Threads</title>
 </head>
 <body>
-    <h1>{{ title }}</h1>
+    <h1>BBS Threads</h1>
+    <form action="/create" method="post">
+        <input type="text" name="title" placeholder="Thread Title">
+        <input type="submit" value="Create Thread">
+    </form>
     <ul>
-        {% for todo in todos %}
-        <li>{{ todo['title'] }} (id: {{ todo['id'] }})
-            <form action="/delete" method="post" style="display: inline;">
-                <input type="hidden" name="id" value="{{ todo['id'] }}">
-                <button type="submit">Delete</button>
-            </form>
-        </li>
+        {% for thread in threads %}
+            <li><a href="/thread/{{ thread['thread_id'] }}">{{ thread['title'] }}</a> (Created at: {{ thread['created_at'] }})</li>
         {% end %}
     </ul>
-    <h2>Add New Todo</h2>
-    <form action="/new" method="post">
-        <input type="text" name="title" required>
-        <button type="submit">Add</button>
-    </form>
 </body>
 </html>

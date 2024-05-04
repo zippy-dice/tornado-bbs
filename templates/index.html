@@ -7,7 +7,14 @@
 <body>
     <h1>BBS Threads</h1>
     <form action="/create" method="post">
-        <input type="text" name="title" placeholder="Thread Title">
+        <div>
+            Title<br>
+            <input type="text" name="title" placeholder="Thread Title" required>
+        </div>
+        <div>
+            Content<br>
+            <textarea name="content" placeholder="Thread Content"></textarea>
+        </div>
         <input type="submit" value="Create Thread">
     </form>
     <ul>

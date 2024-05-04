@@ -56,10 +56,13 @@ class ThreadHandler(tornado.web.RequestHandler):
 class CreateThreadHandler(tornado.web.RequestHandler):
     def post(self):
         title = self.get_argument("title")
+        content = self.get_argument("content")
         db = get_db()
         db.execute('INSERT INTO threads (title) VALUES (?)', (title,))
+        thread_id = db.execute('SELECT last_insert_rowid()').fetchone()[0]
+        db.execute('INSERT INTO posts (thread_id, message) VALUES (?, ?)', (thread_id, content))
         db.commit()
-        self.redirect("/")
+        self.redirect(f"/thread/{thread_id}")
 
 def make_app():
     return tornado.web.Application([
